@@ -8,6 +8,7 @@ const Billing = () => {
 
     const [currentPage, setCurrentPage] = useState(1)
     const [billingPerPage, setPostPerPage] = useState(10)
+    const [searchData, setSearchData] = useState('')
 
     const { data: billings, isLoading, refetch } = useQuery('alltools', () => fetch('http://localhost:5000/billing-list').then(res => res.json()))
 
@@ -36,7 +37,7 @@ const Billing = () => {
             <div className='flex justify-between items-center w-5/6 mx-auto bg-primary p-3 rounded-lg'>
                 <div className='flex justify-center items-center'>
                     <h1 className='mr-5 font-semibold'>Billings</h1>
-                    <input onChange={handleSearch} type="text" placeholder="Search here" class="input w-full max-w-xs border-2 border-black" />
+                    <input onChange={event => { setSearchData(event.target.value) }} type="text" placeholder="Search here" class="input w-full max-w-xs border-2 border-black" />
                 </div>
                 <button class="btn text-white">Add New Bill</button>
             </div>
@@ -57,7 +58,14 @@ const Billing = () => {
                         {/* <!-- row 1 --> */}
 
                         {
-                            currentBillings.map((billing, index) => <BillingRow key={billing._id}
+                            currentBillings.filter((value) => {
+                                if (searchData == '') {
+                                    return value
+                                }
+                                else if (value.name.toLowerCase().includes(searchData.toLowerCase()) || value.email.toLowerCase().includes(searchData.toLowerCase()) || value.phone.includes(searchData)) {
+                                    return value
+                                }
+                            }).map((billing, index) => <BillingRow key={billing._id}
                                 billing={billing}
                                 index={index}
                             ></BillingRow>)
