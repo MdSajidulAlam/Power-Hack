@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from "react-query"
 import Loading from '../Shared/Loading';
+import AddNewBill from './AddNewBill';
 import BillingRow from './BillingRow';
 import Pagination from './Pagination';
 
@@ -39,7 +40,8 @@ const Billing = () => {
                     <h1 className='mr-5 font-semibold'>Billings</h1>
                     <input onChange={event => { setSearchData(event.target.value) }} type="text" placeholder="Search here" class="input w-full max-w-xs border-2 border-black" />
                 </div>
-                <button class="btn text-white">Add New Bill</button>
+                <label for="add-new-bill" class="btn modal-button">Add New Bill</label>
+                {/* <button class="btn text-white">Add New Bill</button> */}
             </div>
             <div class="overflow-x-auto mt-8">
                 <table class="table w-5/6 mx-auto ">
@@ -71,6 +73,7 @@ const Billing = () => {
                             ></BillingRow>)
                         }
                         <Pagination billingPerPage={billingPerPage} totalBillings={billings.length} paginate={paginate}></Pagination>
+                        <AddNewBill></AddNewBill>
                     </tbody>
                 </table>
             </div>

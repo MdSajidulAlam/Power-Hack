@@ -3,11 +3,17 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
 
+    const token = localStorage.getItem("accessToken")
+    console.log(token);
+
+    const signOut = () => {
+        localStorage.removeItem("accessToken")
+    }
 
     const manuItems = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/billing'>Billing Page</Link></li>
-        <li><Link to='/login'>Login</Link></li>
+        <li>{token ? <button onClick={signOut} class="btn btn-ghost">Sign Out</button> : <Link to='/login'>Login</Link>}</li>
 
     </>
 

@@ -2,28 +2,38 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import useToken from '../../hooks/useToken';
+import useUser from '../../hooks/useUser';
 
 
 const Login = () => {
     const navigate = useNavigate()
+    const [user, setUser] = useState([])
+    const [token] = useToken(user)
+    console.log(token);
+    const [users] = useUser()
 
     const { register, getValues, formState: { errors }, handleSubmit } = useForm();
     let signInError
     const onSubmit = data => {
-        fetch('http://localhost:5000/login', {
-            method: "GET",
-        })
-            .then(res => res.json())
-            .then(users => {
-                const foundedUser = users.find(user => user.email == data.email && user.password == data.password)
-                if (foundedUser) {
-                    toast.success("Login Successful", { id: "Sajid" })
-                    navigate('/')
-                } else {
-                    toast.error("Invalid User", { id: "Sajid" })
-                }
+        // fetch('http://localhost:5000/login', {
+        //     method: "GET",
+        // })
+        //     .then(res => res.json())
+        //     .then(users => {
+        const foundedUser = users.find(user => user.email == data.email && user.password == data.password)
+        if (foundedUser) {
+            setUser(foundedUser)
+            if (token) {
+                toast.success("Login Successful", { id: "Sajid" })
+                navigate('/')
+            }
 
-            })
+        } else {
+            toast.error("Invalid User", { id: "Sajid" })
+        }
+
+        // })
     };
 
 
