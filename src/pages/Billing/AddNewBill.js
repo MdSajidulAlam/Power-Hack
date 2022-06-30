@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 const AddNewBill = ({ refetch }) => {
 
@@ -24,6 +25,7 @@ const AddNewBill = ({ refetch }) => {
             .then(data => {
                 refetch()
                 reset()
+                toast.success("Bill Added Successfully", { id: "Sajid" })
 
             })
 

@@ -3,9 +3,12 @@ import { useQuery } from "react-query"
 import Loading from '../Shared/Loading';
 import AddNewBill from './AddNewBill';
 import BillingRow from './BillingRow';
+import DeleteModal from './DeleteModal';
 import Pagination from './Pagination';
 
 const Billing = () => {
+
+    const [bill, setBill] = useState(null)
 
     const [currentPage, setCurrentPage] = useState(1)
     const [billingPerPage, setPostPerPage] = useState(10)
@@ -65,11 +68,12 @@ const Billing = () => {
                                 }
                             }).map((billing, index) => <BillingRow key={billing._id}
                                 billing={billing}
-                                index={index}
+                                setBill={setBill}
                             ></BillingRow>)
                         }
                         <Pagination billingPerPage={billingPerPage} totalBillings={billings.length} paginate={paginate}></Pagination>
                         <AddNewBill refetch={refetch}></AddNewBill>
+                        {bill && <DeleteModal bill={bill} setBill={setBill} refetch={refetch} />}
                     </tbody>
                 </table>
             </div>
