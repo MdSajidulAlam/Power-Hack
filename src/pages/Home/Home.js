@@ -1,12 +1,10 @@
 import React from 'react';
-import Billing from '../Billing/Billing';
-import Navbar from './Navbar';
+import Banner from './Banner';
 
 const Home = () => {
     return (
         <div>
-            <Navbar />
-            <Billing />
+            <Banner />
         </div>
     );
 };

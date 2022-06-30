@@ -17,12 +17,7 @@ const Billing = () => {
                 </thead>
                 <tbody>
                     {/* <!-- row 1 --> */}
-                    <tr>
-                        <th>1</th>
-                        <td>Cy Ganderton</td>
-                        <td>Quality Control Specialist</td>
-                        <td>Blue</td>
-                    </tr>
+
                     {/* <!-- row 2 --> */}
                     <tr>
                         <th>2</th>
