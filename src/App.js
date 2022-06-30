@@ -6,6 +6,7 @@ import Billing from './pages/Billing/Billing';
 import Navbar from './pages/Home/Navbar';
 import Login from './pages/Register/Login';
 import Signup from './pages/Register/Signup';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/login' element={<Login />}></Route>
         <Route path='/signup' element={<Signup />}></Route>
       </Routes>
+      <Toaster />
     </div>
   );
 }

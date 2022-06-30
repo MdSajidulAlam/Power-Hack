@@ -1,10 +1,11 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
 
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
+    const navigte = useNavigate()
 
     const onSubmit = async data => {
         const name = data.name
@@ -23,6 +24,7 @@ const Signup = () => {
             .then(data => {
                 console.log(data);
                 reset()
+                navigte('/billing')
             })
 
 

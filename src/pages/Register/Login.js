@@ -1,16 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 
 const Login = () => {
+    const navigate = useNavigate()
 
     const { register, getValues, formState: { errors }, handleSubmit } = useForm();
-
-    const onSubmit = data => {
-        console.log(data);
-    };
     let signInError
+    const onSubmit = data => {
+        fetch('http://localhost:5000/login', {
+            method: "GET",
+        })
+            .then(res => res.json())
+            .then(users => {
+                const foundedUser = users.find(user => user.email == data.email && user.password == data.password)
+                if (foundedUser) {
+                    toast.success("Login Successful", { id: "Sajid" })
+                    navigate('/')
+                } else {
+                    toast.error("Invalid User", { id: "Sajid" })
+                }
+
+            })
+    };
+
+
+
 
     return (
         <div className='flex justify-center items-center h-screen'>
