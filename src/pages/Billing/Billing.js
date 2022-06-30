@@ -16,19 +16,15 @@ const Billing = () => {
     if (isLoading) {
         return <Loading />
     }
-    const handleSearch = (e) => {
-        const search = e.target.value
-        const arr = []
-        if (search) {
-            const searchResult = billings.filter(billing => billing.name == search || billing.email == search || billing.phone == search)
-            arr.push(searchResult)
-            console.log(arr);
-        }
+
+    function reverse(billings) {
+        return billings.map((item, idx) => billings[billings.length - 1 - idx])
     }
+    const reversed = reverse(billings)
 
     const indexOfLastBilling = currentPage * billingPerPage
     const indexOfFirstBilling = indexOfLastBilling - billingPerPage
-    const currentBillings = billings.slice(indexOfFirstBilling, indexOfLastBilling)
+    const currentBillings = reversed.slice(indexOfFirstBilling, indexOfLastBilling)
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
@@ -73,7 +69,7 @@ const Billing = () => {
                             ></BillingRow>)
                         }
                         <Pagination billingPerPage={billingPerPage} totalBillings={billings.length} paginate={paginate}></Pagination>
-                        <AddNewBill></AddNewBill>
+                        <AddNewBill refetch={refetch}></AddNewBill>
                     </tbody>
                 </table>
             </div>

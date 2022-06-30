@@ -1,26 +1,28 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-const AddNewBill = () => {
+const AddNewBill = ({ refetch }) => {
 
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
     const onSubmit = async data => {
         const name = data.name
         const email = data.email
-        const password = data.password
-        const user = { name, email, password }
-        fetch('http://localhost:5000/registration', {
+        const phone = data.phone
+        const paidAmount = data.amount
+        const billing = { name, email, phone, paidAmount }
+        console.log(billing);
+        fetch('http://localhost:5000/add-billing', {
             method: "POST",
             headers: {
                 'content-type': 'application/json',
 
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify(billing)
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                refetch()
                 reset()
 
             })
@@ -39,7 +41,7 @@ const AddNewBill = () => {
             <div class="modal">
                 <div class="modal-box relative">
                     <label for="add-new-bill" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <h3 class="text-lg font-bold">Congratulations random Internet user!</h3>
+                    <h3 class="text-lg font-bold">ADD A NEW BILL!</h3>
                     <form onSubmit={handleSubmit(onSubmit)}>
 
                         <div className="form-control w-full max-w-xs">
@@ -138,7 +140,7 @@ const AddNewBill = () => {
                             </label>
                         </div>
                         {submitError}
-                        <input className='btn w-full max-w-xs' type="submit" value="SIGN UP" />
+                        <input className='btn w-full max-w-xs' type="submit" value="ADD A NEW BILL" />
                     </form>
                 </div>
             </div>
