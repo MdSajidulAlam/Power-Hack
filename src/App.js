@@ -7,7 +7,7 @@ import Navbar from './pages/Home/Navbar';
 
 function App() {
   return (
-    <div>
+    <div className='font-[poppin]'>
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />}></Route>
