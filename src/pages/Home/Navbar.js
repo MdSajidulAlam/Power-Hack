@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
 
     const token = localStorage.getItem("accessToken")
-    console.log(token);
 
     const signOut = () => {
         localStorage.removeItem("accessToken")
@@ -28,7 +27,7 @@ const Navbar = () => {
                         {manuItems}
                     </ul>
                 </div>
-                <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+                <a class="btn btn-ghost normal-case text-xl">Power Hack</a>
             </div>
             <div class="navbar-center hidden lg:flex">
                 <ul class="menu menu-horizontal p-0">

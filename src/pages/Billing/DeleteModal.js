@@ -3,7 +3,7 @@ import React from 'react';
 const DeleteModal = ({ bill, setBill, refetch }) => {
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/delete-bill/${id}`, {
+        fetch(`https://remembrance-toonie-89591.herokuapp.com/delete-bill/${id}`, {
             method: "DELETE",
             headers: {
                 'content-type': 'application/json'

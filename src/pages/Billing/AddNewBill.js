@@ -12,7 +12,7 @@ const AddNewBill = ({ refetch, children }) => {
         const phone = data.phone
         const paidAmount = data.amount
         const billing = { name, email, phone, paidAmount }
-        fetch('http://localhost:5000/add-billing', {
+        fetch('https://remembrance-toonie-89591.herokuapp.com/add-billing', {
             method: "POST",
             headers: {
                 'content-type': 'application/json',

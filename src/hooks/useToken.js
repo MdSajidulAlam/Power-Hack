@@ -6,7 +6,7 @@ const useToken = user => {
         const email = user?.email
         const currentUser = { email: email }
         if (email) {
-            fetch('http://localhost:5000/login', {
+            fetch('https://remembrance-toonie-89591.herokuapp.com/login', {
                 method: 'POST',
                 headers: {
                     'content-type': "application/json"

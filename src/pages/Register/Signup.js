@@ -12,7 +12,7 @@ const Signup = () => {
         const email = data.email
         const password = data.password
         const user = { name, email, password }
-        fetch('http://localhost:5000/registration', {
+        fetch('https://remembrance-toonie-89591.herokuapp.com/registration', {
             method: "POST",
             headers: {
                 'content-type': 'application/json',

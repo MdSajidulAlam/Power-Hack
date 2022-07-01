@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import useToken from '../../hooks/useToken';
-import useUser from '../../hooks/useUser';
 
 
 const Login = () => {
@@ -11,12 +10,11 @@ const Login = () => {
     const [user, setUser] = useState([])
     const [token] = useToken(user)
     console.log(token);
-    // const [users] = useUser()
 
     const { register, getValues, formState: { errors }, handleSubmit } = useForm();
     let signInError
     const onSubmit = data => {
-        fetch('http://localhost:5000/login', {
+        fetch('https://remembrance-toonie-89591.herokuapp.com/login', {
             method: "GET",
         })
             .then(res => res.json())

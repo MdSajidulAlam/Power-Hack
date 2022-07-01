@@ -2,7 +2,7 @@ import { useState } from "react"
 
 const useUser = () => {
     const [users, setUsers] = useState([])
-    fetch('http://localhost:5000/login', {
+    fetch('https://remembrance-toonie-89591.herokuapp.com/login', {
         method: "GET",
     })
         .then(res => res.json())

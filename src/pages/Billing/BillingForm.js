@@ -1,47 +1,20 @@
 import React from 'react';
 
 import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
 
-const UpdateBill = ({ _id, refetch }) => {
+const BillingForm = ({ onSubmit, onAddBill }) => {
 
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
 
 
-    const onSubmit = async data => {
-        const name = data.name
-        const email = data.email
-        const phone = data.phone
-        const paidAmount = data.amount
-        const billing = { name, email, phone, paidAmount }
-        fetch(`http://localhost:5000/update-bill/${_id}`, {
-            method: "PATCH",
-            headers: {
-                'content-type': 'application/json',
-
-            },
-            body: JSON.stringify(billing)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                refetch()
-                reset()
-                toast.success("Bill Updated Successfully", { id: "Sajid" })
-
-            })
-
-
-    };
-
     let submitError
     return (
         <div>
-            <input type="checkbox" id="update-bill" class="modal-toggle" />
+            <input type="checkbox" id="bill-form" class="modal-toggle" />
             <div class="modal">
                 <div class="modal-box relative">
-                    <label for="update-bill" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <label for="bill-form" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <h3 class="text-lg font-bold">UPDATE BILL !</h3>
                     <form onSubmit={handleSubmit(onSubmit)}>
 
@@ -149,4 +122,4 @@ const UpdateBill = ({ _id, refetch }) => {
     );
 };
 
-export default UpdateBill;
+export default BillingForm;
