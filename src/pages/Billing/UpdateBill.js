@@ -1,10 +1,13 @@
 import React from 'react';
+
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
-const AddNewBill = ({ refetch, children }) => {
+const UpdateBill = ({ _id, refetch }) => {
 
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
+
+
 
     const onSubmit = async data => {
         const name = data.name
@@ -12,8 +15,8 @@ const AddNewBill = ({ refetch, children }) => {
         const phone = data.phone
         const paidAmount = data.amount
         const billing = { name, email, phone, paidAmount }
-        fetch('http://localhost:5000/add-billing', {
-            method: "POST",
+        fetch(`http://localhost:5000/update-bill/${_id}`, {
+            method: "PATCH",
             headers: {
                 'content-type': 'application/json',
 
@@ -25,7 +28,7 @@ const AddNewBill = ({ refetch, children }) => {
                 console.log(data);
                 refetch()
                 reset()
-                toast.success("Bill Added Successfully", { id: "Sajid" })
+                toast.success("Bill Updated Successfully", { id: "Sajid" })
 
             })
 
@@ -35,11 +38,11 @@ const AddNewBill = ({ refetch, children }) => {
     let submitError
     return (
         <div>
-            <input type="checkbox" id="add-new-bill" class="modal-toggle" />
+            <input type="checkbox" id="update-bill" class="modal-toggle" />
             <div class="modal">
                 <div class="modal-box relative">
-                    <label for="add-new-bill" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <h3 class="text-lg font-bold">ADD A NEW BILL !</h3>
+                    <label for="update-bill" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <h3 class="text-lg font-bold">UPDATE BILL !</h3>
                     <form onSubmit={handleSubmit(onSubmit)}>
 
                         <div className="form-control w-full max-w-xs">
@@ -138,15 +141,12 @@ const AddNewBill = ({ refetch, children }) => {
                             </label>
                         </div>
                         {submitError}
-                        <input className='btn w-full max-w-xs' type="submit" value="ADD A NEW BILL" />
+                        <input className='btn w-full max-w-xs' type="submit" value="UPDATE BILL" />
                     </form>
                 </div>
             </div>
         </div>
-        // <div>
-        //     <SubmitForm setBilling={setBilling} onSubmit={onSubmit}></SubmitForm>
-        // </div>
     );
 };
 
-export default AddNewBill;
+export default UpdateBill;

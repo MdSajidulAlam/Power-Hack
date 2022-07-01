@@ -1,8 +1,10 @@
 import React from 'react';
 import Loading from '../Shared/Loading';
+import AddNewBill from './AddNewBill';
+import UpdateBill from './UpdateBill';
 
 
-const BillingRow = ({ billing, setBill }) => {
+const BillingRow = ({ billing, setBill, refetch }) => {
 
     const { _id, name, email, phone, paidAmount } = billing
 
@@ -10,21 +12,26 @@ const BillingRow = ({ billing, setBill }) => {
 
     return (
         <tr>
-            <th>{_id ? _id : <Loading></Loading>}</th>
+            <th>{_id ? "Generated Billing Id" : <Loading></Loading>}</th>
             <td>{name}</td>
             <td>{email}</td>
             <td>{phone}</td>
             <td>$ {paidAmount}</td>
             <td><>
-                <button class="btn btn-xs mr-3">Edit</button>
+                <label
+                    for="update-bill"
+                    class="btn modal-button btn-xs mr-3"
+
+                >Edit</label>
                 <label
                     for="delete-modal"
                     className="btn modal-button  btn-xs btn-error"
                     onClick={() => setBill(billing)}
 
                 >Delete</label>
-                {/* <button onClick={() => handleDelete(_id)} class="btn btn-xs btn-error">Delete</button> */}
             </></td>
+            <AddNewBill ></AddNewBill>
+            <UpdateBill _id={_id} refetch={refetch}></UpdateBill>
         </tr>
     );
 };

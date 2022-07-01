@@ -11,29 +11,29 @@ const Login = () => {
     const [user, setUser] = useState([])
     const [token] = useToken(user)
     console.log(token);
-    const [users] = useUser()
+    // const [users] = useUser()
 
     const { register, getValues, formState: { errors }, handleSubmit } = useForm();
     let signInError
     const onSubmit = data => {
-        // fetch('http://localhost:5000/login', {
-        //     method: "GET",
-        // })
-        //     .then(res => res.json())
-        //     .then(users => {
-        const foundedUser = users.find(user => user.email == data.email && user.password == data.password)
-        if (foundedUser) {
-            setUser(foundedUser)
-            if (token) {
-                toast.success("Login Successful", { id: "Sajid" })
-                navigate('/')
-            }
+        fetch('http://localhost:5000/login', {
+            method: "GET",
+        })
+            .then(res => res.json())
+            .then(users => {
+                const foundedUser = users.find(user => user.email == data.email && user.password == data.password)
+                if (foundedUser) {
+                    setUser(foundedUser)
+                    if (token) {
+                        toast.success("Login Successful", { id: "Sajid" })
+                        navigate('/')
+                    }
 
-        } else {
-            toast.error("Invalid User", { id: "Sajid" })
-        }
+                } else {
+                    toast.error("Invalid User", { id: "Sajid" })
+                }
 
-        // })
+            })
     };
 
 

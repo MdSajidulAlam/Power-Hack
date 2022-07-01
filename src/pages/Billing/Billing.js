@@ -40,7 +40,6 @@ const Billing = () => {
                     <input onChange={event => { setSearchData(event.target.value) }} type="text" placeholder="Search here" class="input w-full max-w-xs border-2 border-black" />
                 </div>
                 <label for="add-new-bill" class="btn modal-button">Add New Bill</label>
-                {/* <button class="btn text-white">Add New Bill</button> */}
             </div>
             <div class="overflow-x-auto mt-8">
                 <table class="table w-5/6 mx-auto ">
@@ -56,7 +55,6 @@ const Billing = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* <!-- row 1 --> */}
 
                         {
                             currentBillings.filter((value) => {
@@ -69,6 +67,7 @@ const Billing = () => {
                             }).map((billing, index) => <BillingRow key={billing._id}
                                 billing={billing}
                                 setBill={setBill}
+                                refetch={refetch}
                             ></BillingRow>)
                         }
                         <Pagination billingPerPage={billingPerPage} totalBillings={billings.length} paginate={paginate}></Pagination>
